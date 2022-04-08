@@ -76,6 +76,7 @@ DA could follow a similar design, using TCP sockets and Julia's built-in
 capabilities for asynchronous programming: tasks and channels.
 
 Other alternatives that could be considered for IPC are:
+
 - Unix domain sockets:
   Since DA processes will run in the same machine,
   they could communicate using Unix domain sockets (or named pipes on Windows).
@@ -106,7 +107,7 @@ and the master process should be able to suspend the execution of any worker pro
 
 Pluto has existing problems with signal handling on Windows ([see fonsp/Pluto.jl#452][sig-win]),
 
-It may be worth looking into wether signal handling can be properly emulated on Windows via Libuv;
+It may be worth looking into whether signal handling can be properly emulated on Windows via Libuv;
 or if it's already being done, find why it's not working.
 In any case, the main goal for DA is providing the functionality that's already works with Distributed,
 so this issue will only be an optional deliverable,
