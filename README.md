@@ -7,7 +7,7 @@ TODO:
 Sergio Alejandro Vargas <savargasqu+git@unal.edu.co>
 
 
-# An Alternative to Distributed.jl for Pluto.jl
+# An Alternative to Distributed.jl for Pluto
 
 <!-- synopsis -->
 
@@ -82,7 +82,7 @@ Other alternatives that could be considered for IPC are:
   they could communicate using Unix domain sockets (or named pipes on Windows).
   This approach could lead to faster communication between processes,
   but it might be limited by the cross-platform capabilities of Julia
-  (Pluto already has some platform specific issues, see Error Handling below).
+  (Pluto already has some platform specific issues, see [Error Handling](### Error Handling) below).
   It will be necessary to study the Libuv documentation (library used by Julia)
   and to write a prototype to determine the viability of this approach.
 
@@ -94,13 +94,13 @@ Other alternatives that could be considered for IPC are:
 [Jupyter]: https://docs.jupyter.org/en/latest/projects/architecture/content-architecture.html#the-ipython-kernel
 [zmqjl]: https://github.com/JuliaInterop/ZMQ.jl 
 
-### serialization
+### Serialization
 `Distributed` uses the `Serialization` module (part of the stdlib).
 Currently there doesn't seem to be any reason not to use `Serialization`,
 but if one were needed, Pluto already uses MessagePack to communicate with the front-end,
 and that package could be re-used here.
 
-### Error handling
+### Error Handling
 Pluto is meant to be resilient to errors in the user's code execution (the user should be able to make mistakes!)
 Worker processes should handle errors appropriately and communicate them to the main process;
 and the master process should be able to suspend the execution of any worker process.
@@ -126,7 +126,7 @@ For completeness, it's worth mentioning that the features of Distributed that DA
   (equivalent to `:master_worker` topology of `Distributed`).
 
 
-## Integration
+## Integration with Pluto
 
 The second part of the project consists in integrating DA into the Pluto codebase,
 replacing all uses of `Distributed`. This includes:
@@ -138,4 +138,34 @@ replacing all uses of `Distributed`. This includes:
 - Updating the documentation for Pluto to make clear how DA is integrated.
   Since DA will be a bespoke package it's specially important that future contributors to Pluto
   can understand it with ease.
+
+The project can be considered complete when [issue #300][issue300] is closed.
+
+
+## Future work
+
+Beyond the main goal of the project, some nice-to-haves might be:
+
+- Resolve [issue #452][sig-win] mentioned in [Error Handling](### Error Handling).
+- Write a Pluto notebook that showcases Distributed
+  or serves as a tutorial on distributed computing.
+
+
+## Schedule
+
+The project can follow the regular GSoC timeline, starting in June 6 and ending in September 12.
+I may be unable to code during the penultimate week of the program (first week of september). <!-- marathon -->
+However, at that point most of the coding tasks should be complete.
+
+The breakdown of the project for the 12 weeks of the program might look like:
+
+- W1: TCP and UDS server prototypes
+- W2: Study ZeroMQ
+- W3: ZeroMQ server prototype
+- W4: Settle on an IPC implementation.
+- W5: Buffer (in case of any delay)
+- W6: Finish package and present as part of the first evaluation
+- W7: Familiarize with Pluto code base
+- W8-10: Integrate package with Pluto 
+- W11-12: Tests and documentation
 

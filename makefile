@@ -1,2 +1,2 @@
 make:
-	pandoc -t latex -o proposal.pdf --variable urlcolor=teal README.md
+	pandoc --variable urlcolor=teal -o proposal.pdf README.md
