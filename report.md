@@ -8,7 +8,7 @@ GitHub: [@savq](https://github.com/savq)
 ### Introduction
 
 During the 2022 Google Summer of Code I worked on developing an alternative package to Distributed.jl
-for the Pluto.jl notebook environment. The motivation for the work can be found in more detail in the
+for the Pluto.jl notebook environment. The motivation for this project can be found in more detail in the
 [proposal for the project.](https://github.com/savq/gsoc-2022/blob/master/proposal.md)
 
 
@@ -35,11 +35,12 @@ or to allow Pluto to keep using Distributed on Windows.
 ### Pluto on Malt
 
 The second part of the project was integrating Malt into Pluto.
-This task proved to be much easier than expected.
-The Pluto codebase is well modularized.
-In particular, most functions that actually call the external processes are in the Workspace Manager module,
+This task was much easier than expected, since the Pluto codebase is —for the most part— well modularized.
+In particular, most functions that actually call the external processes were in the same module (`WorkspaceManager`),
 so integrating Malt was simply replacing the calls to Distributed functions with calls to Malt,
 and updating the tests accordingly.
+
+Importantly, Pluto on Malt is able to use Distributed.jl, which was the main motivation for the project.
 
 The work on integrating Malt in Pluto is on [fonsp/Pluto.jl#2240](https://github.com/fonsp/Pluto.jl/pull/2240).
 
@@ -60,13 +61,12 @@ Defining the interface is effectively making explicit the work that was already 
 
 ### Malt beyond Pluto
 
-Since the first proposal of the project,
-I emphasized the need for the Distributed alternative to be its own stand-alone package.
+Since the proposal of the project, I emphasized the need for the Distributed alternative to be its own stand-alone package.
 The main reason is that being able to execute code in different processes is useful
 in many contexts outside cluster computing (the main use case of Distributed).
 
 Malt could be extended to allow non-Julia processes to create Malt workers, something that's out of scope for Distributed.
-For example, This could allow editors and IDEs to create a Malt worker for code evaluation
+This could allow editors and IDEs to create a Malt worker for code evaluation
 (similar to Clojure's [nREPL](https://nrepl.org/nrepl/index.html)).
 It would also allow Malt workers to be called from the shell
 (similar to [DaemonMode.jl](https://github.com/dmolina/DaemonMode.jl)).
