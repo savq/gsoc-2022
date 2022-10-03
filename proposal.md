@@ -55,7 +55,9 @@ To solve this, the project will be divided in two parts:
 The first part of the project consists of the design and implementation of a stand-alone package to create isolated Julia processes.
 This package should be able to replace `Distributed` on the Pluto codebase,
 but it will not implement all the functionality of `Distributed`.
-For the rest of this proposal, this package will be referred to as **DA** (`Distributed` Alternative). <!-- TODO: find a better name! -->
+For the rest of this proposal, this package will be referred to as **DA** (`Distributed` Alternative).[^name]
+
+[^name]: During GSoC the project was baptized as Malt (Multiprocessing Alternative).
 
 <!-- What are the potential hurdles you might encounter, and how can you resolve them?
      Is there anything you need to learn about as part of the work?
